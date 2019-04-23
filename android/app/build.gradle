@@ -145,13 +145,13 @@ android {
 
     buildTypes {
         release {
+//            applicationIdSuffix ".release"
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
 
         }
 //        debug {
-//            applicationIdSuffix ".debug"
 //            minifyEnabled enableProguardInReleaseBuilds
 //            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
 //        }
@@ -166,7 +166,7 @@ android {
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode + project.env.get("ENV")
             }
         }
     }
